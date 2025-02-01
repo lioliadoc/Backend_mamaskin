@@ -1,4 +1,4 @@
-from flask import Blueprint, abort, make_response, Response, request
+from flask import Blueprint, abort, make_response, Response, request, url_for
 from sqlalchemy import or_
 import requests
 from app.models.symptom import Symptom
@@ -8,6 +8,12 @@ from ..db import db
 import os
 
 bp = Blueprint("condition_bp", __name__, url_prefix="/conditions")
+
+@bp.get("")
+def get_all_conditions():
+    conditions = db.session.query(Condition).all()
+    conditions_list = [condition.to_dict() for condition in conditions]
+    return conditions_list, 200
 
 @bp.get("/<condition_id>")
 def get_condition_by_id(condition_id):
@@ -42,3 +48,11 @@ def get_condition_by_symptom():
         return {"message": "No matching conditions found."}, 200
 
     return {"conditions": results}, 200
+
+@bp.get("/<condition_id>/images")
+def get_condition_images(condition_id):
+    image_urls = [
+        url_for('static', filename=f'images/conditions/{condition_id}_1.jpg', _external=True),
+        url_for('static', filename=f'images/conditions/{condition_id}_2.jpg', _external=True)
+    ]
+    return {"images": image_urls}, 200

@@ -10,7 +10,7 @@ class Story(db.Model):
     text: Mapped[str]
     created_at: Mapped[datetime.datetime] = mapped_column(server_default=func.now())
     like_count: Mapped[int] = mapped_column(server_default="0")
-    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), name="fk_story_user_id")
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id', ondelete="CASCADE"),name="fk_story_user_id")
     
     def __repr__(self):
         return f"<Story {self.name}>"

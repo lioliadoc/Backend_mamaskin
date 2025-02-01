@@ -13,12 +13,15 @@ def seed_data():
         if existing:
             existing.description = cond_info["description"]
             existing.references = cond_info["references"]
+            # Update the newly added field
+            existing.requires_healthcare_provider = cond_info["requires_healthcare_provider"]
             condition_map[name] = existing
         else:
             new_condition = Condition(
                 name=name,
                 description=cond_info["description"],
-                references=cond_info["references"]
+                references=cond_info["references"],
+                requires_healthcare_provider=cond_info["requires_healthcare_provider"]
             )
             db.session.add(new_condition)
             condition_map[name] = new_condition
@@ -41,7 +44,6 @@ def seed_data():
                 condition_id=cond_obj.id
             )
             db.session.add(new_symptom)
-
    
     db.session.commit()
     print("Database seeded successfully!")
