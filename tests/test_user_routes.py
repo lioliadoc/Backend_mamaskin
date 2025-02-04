@@ -19,5 +19,5 @@ def test_create_user(create_user_response):
     assert response.status_code == 201  
     user_data = response.get_json()
     assert user_data["google_id"] == "111222333"
-    # etc.
+  
 

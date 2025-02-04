@@ -41,7 +41,11 @@ def get_condition_by_symptom():
     results = []
     for condition in matching_conditions:
         results.append({
-            "condition_name": condition.name
+            "id": condition.id,
+            "condition_name": condition.name,
+            "description": condition.description,
+            "references": condition.references,
+            "requires_healthcare_provider": "Yes" if condition.requires_healthcare_provider else "No"
         })
 
     if not results:

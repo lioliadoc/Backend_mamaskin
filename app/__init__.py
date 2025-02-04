@@ -18,7 +18,7 @@ from flask import Flask, render_template
 load_dotenv()
 
 def create_app(config=None):
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='static')
     # CORS(app)
     CORS(app, supports_credentials=True, origins=["http://localhost:5173"])
 
@@ -48,5 +48,7 @@ def create_app(config=None):
     @app.route("/", endpoint="home")
     def redirect_frontend():
         return redirect("http://localhost:5173/")
+    
+    print(app.static_folder)
     
     return app

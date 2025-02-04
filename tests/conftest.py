@@ -37,9 +37,6 @@ def client(app):
     
 @pytest.fixture
 def condition_fixture(app):
-    """
-    Creates a test Condition in the database.
-    """
     with app.app_context():
         condition = Condition(
         name="Test Condition",
@@ -55,29 +52,24 @@ def condition_fixture(app):
 
 @pytest.fixture
 def get_condition_by_id_response(client, condition_fixture):
-    """
-    Uses the test client to request GET /conditions/<condition_id>
-    for the condition created in condition_fixture.
-    """
+
     # Build the URL using the condition id
     response = client.get(f"/conditions/{condition_fixture.id}")
     return response
 
 @pytest.fixture
 def condition_search_fixture(app):
-    """
-    Creates a test Condition and associates it with a Symptom.
-    """
+   
     with app.app_context():
         condition = Condition(name="Rash Condition")
-        # Create a Symptom instance (assumes Symptom model has a 'name' field)
+       
         symptom = Symptom(name="rash")
-        # Link the symptom to the condition. (Assumes Condition.symptoms is appendable.)
+     
         condition.symptoms.append(symptom)
         db.session.add_all([condition, symptom])
         db.session.commit()
         yield condition
-        # Cleanup: Remove the condition and symptom from the DB.
+      
         db.session.delete(condition)
         db.session.delete(symptom)
         db.session.commit()
@@ -124,8 +116,6 @@ def user_with_stories_fixture(app):
         db.session.commit()
 
         yield user
-
-        # First delete the story, then delete the user:
         db.session.delete(story)
         db.session.delete(user)
         db.session.commit()
@@ -139,10 +129,6 @@ def get_user_stories_response(client, user_with_stories_fixture):
 
 @pytest.fixture
 def create_user_response(client):
-    """
-    Makes a POST request to /users to create a new user.
-    Adjust the JSON payload as needed.
-    """
     user = {
         "google_id": "111222333",
         "name": "New User",
@@ -154,9 +140,6 @@ def create_user_response(client):
 
 @pytest.fixture
 def story_fixture(app, user_fixture):
-    """
-    Creates a single Story in the database, associated with user_fixture.
-    """
     with app.app_context():
         story = Story(
             name="My First Story",
@@ -166,16 +149,11 @@ def story_fixture(app, user_fixture):
         db.session.add(story)
         db.session.commit()
         yield story
-
-        # Cleanup
         db.session.delete(story)
         db.session.commit()
 
 @pytest.fixture
 def multiple_stories_fixture(app, user_fixture):
-    """
-    Creates multiple Stories (2) for testing the GET /stories list endpoint.
-    """
     with app.app_context():
         story1 = Story(
             name="Story One",
@@ -198,9 +176,6 @@ def multiple_stories_fixture(app, user_fixture):
 
 @pytest.fixture
 def create_story_response(client, user_fixture):
-    """
-    POST /stories to create a new Story. Returns the response.
-    """
     story = {
         "name": "Created Story",
         "text": "Created text content",
