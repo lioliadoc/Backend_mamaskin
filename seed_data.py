@@ -711,7 +711,62 @@ conditions_data = [
         ),
         "references": "https://dermnetnz.org/topics/sebaceous-hyperplasia",
         "requires_healthcare_provider": False
-    }
+    },
+    {
+            "name": "Linea Nigra",
+            "description": (
+                "Linea nigra is a common and harmless skin change that occurs during pregnancy, characterized by a dark vertical line running from the navel down to the pubic area. "
+                "This line can sometimes extend above the navel. "
+                "It is thought to result from hormonal changes that increase melanin production, leading to hyperpigmentation along the midline of the abdomen. "
+                "Linea nigra often appears around the second trimester, though the timing can vary among individuals. "
+                "While it usually fades on its own after childbirth, some women may notice that it persists for several months postpartum. "
+                "No specific treatment is required, but maintaining a gentle skincare routine and using sunscreen can help reduce further pigmentation. "
+                "If the line appears unusually wide, dark, or is accompanied by other abnormal skin changes, seeking medical evaluation can provide reassurance."
+            ),
+            "references": "https://www.medicalnewstoday.com/articles/317955",
+            "requires_healthcare_provider": False
+        },
+        {
+            "name": "Striae Gravidarum",
+            "description": (
+                "Striae Gravidarum, commonly referred to as stretch marks, are pink, red, or purple streaks that commonly develop on the abdomen, breasts, hips, buttocks, or thighs during pregnancy. "
+                "They typically appear in the later stages of pregnancy when rapid stretching of the skin and hormonal changes affect the dermis. "
+                "Over time, these marks usually fade to a lighter or silvery shade postpartum. "
+                "While they are generally benign and do not cause medical complications, some women may experience mild itching. "
+                "Maintaining skin hydration through lotions or creams may help alleviate dryness or discomfort, though definitive prevention methods remain inconclusive. "
+                "No specific treatment is required, and many women find that the appearance of striae diminishes over time. "
+                "If there is concern about unusual skin changes or severe itching, consulting a healthcare provider can provide reassurance or further guidance."
+            ),
+            "references": "https://dermnetnz.org/topics/stretch-marks",
+            "requires_healthcare_provider": False
+        },
+        {
+            "name": "Spider Telangiectasias",
+            "description": (
+                "Spider telangiectasias, also known as spider angiomas or spider veins, are small, dilated blood vessels visible near the surface of the skin. "
+                "They often appear as tiny red spots with radiating spider-like legs and are commonly found on the face, neck, upper trunk, or arms. "
+                "During pregnancy, increased estrogen levels contribute to their development, making them more prevalent. "
+                "While usually harmless and painless, some women may experience mild itching or notice them for cosmetic reasons. "
+                "They may fade or become less noticeable after childbirth as hormone levels return to normal. "
+                "No specific treatment is necessary unless they cause significant discomfort or concern, in which case medical therapies such as laser treatment or sclerotherapy may be considered. "
+                "If there is an unusually large number of spider telangiectasias or other worrisome skin changes, consulting a healthcare provider is recommended."
+            ),
+            "references": "https://dermnetnz.org/topics/spider-naevus",
+            "requires_healthcare_provider": False
+        },
+        "conditions": [
+        {
+            "name": "Spider Palmar Erythema",
+            "description": (
+                "Spider Palmar Erythema, commonly referred to simply as Palmar Erythema, is characterized by a reddish discoloration of the palms. "
+                "During pregnancy, elevated estrogen levels can increase blood flow to the skin, causing the palms to appear warm and flushed. "
+                "It often presents symmetrically on both hands and may become more pronounced when pressure is applied or during times of increased body temperature, such as with exercise or hot weather. "
+                "Most cases are benign and typically resolve after childbirth as hormone levels return to pre-pregnancy states. "
+                "While usually harmless, persistent redness or associated symptoms (such as severe itching) may warrant medical evaluation to exclude other underlying conditions."
+            ),
+            "references": "https://dermnetnz.org/topics/palmar-erythema",
+            "requires_healthcare_provider": False
+        }
 ]
 
 symptoms_data = [
@@ -917,5 +972,38 @@ symptoms_data = [
 
     # Striae Gravidarum
     {"name": "Noticeable linear red or purple streaks on the abdomen and hips", "condition_name": "Striae Gravidarum"},
-    {"name": "Mild itching and skin tightness over stretch mark areas", "condition_name": "Striae Gravidarum"}
+    {"name": "Mild itching and skin tightness over stretch mark areas", "condition_name": "Striae Gravidarum"},
+
+    # Linea Nigra
+        {"name": "Dark vertical line on the abdomen", "condition_name": "Linea Nigra"},
+
+    # Striae Gravidarum
+        {"name": "Reddish or pinkish streaks on the abdomen or thighs", "condition_name": "Striae Gravidarum"},
+    #Spider Telangiectasias
+        {
+            "name": "Tiny red spots with radiating blood vessels",
+            "condition_name": "Spider Telangiectasias"
+        },
+        {
+            "name": "Visible spider-like veins commonly on the face or neck",
+            "condition_name": "Spider Telangiectasias"
+        },
+        {
+            "name": "Mild itching or no discomfort at all",
+            "condition_name": "Spider Telangiectasias"
+        },
+        # Spider Palmar Erythema
+        {
+            "name": "Reddish discoloration of the palms",
+            "condition_name": "Spider Palmar Erythema"
+        },
+        {
+            "name": "Warmth or flushing in the hands",
+            "condition_name": "Spider Palmar Erythema"
+        },
+        {
+            "name": "Discoloration becomes more pronounced with pressure or heat",
+            "condition_name": "Spider Palmar Erythema"
+        }
+    
 ]
