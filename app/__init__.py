@@ -51,6 +51,6 @@ def create_app(config=None):
     
     @app.route("/", endpoint="home")
     def redirect_frontend():
-        return redirect("http://localhost:5173/")
+        return "Backend is up! Frontend coming soon."
     
     return app
