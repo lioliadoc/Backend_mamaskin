@@ -4,9 +4,9 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 class Condition(db.Model):
     __tablename__ = 'condition'
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    name: Mapped[str]
-    description: Mapped[str]
-    references: Mapped[str]
+    name: Mapped[str] 
+    description: Mapped[str] 
+    references: Mapped[str] 
     requires_healthcare_provider: Mapped[bool] = mapped_column(db.Boolean, default=False, nullable=False)
     symptoms: Mapped[list["Symptom"]] = relationship(back_populates="condition")
 

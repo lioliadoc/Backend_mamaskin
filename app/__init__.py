@@ -20,7 +20,6 @@ load_dotenv()
 def create_app(config=None):
     app = Flask(__name__, static_folder='static')
     CORS(app)
-    # CORS(app, supports_credentials=True, origins=["http://localhost:5173"])
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     database_url = os.environ.get('DATABASE_URL')
@@ -28,10 +27,6 @@ def create_app(config=None):
         database_url = database_url.replace('postgres://', 'postgresql://', 1)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url
-
-    app.secret_key = "your_generated_random_string"
-    if config:
-        app.config.update(config)
 
     db.init_app(app)
     migrate.init_app(app,db)
