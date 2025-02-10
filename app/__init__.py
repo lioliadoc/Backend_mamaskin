@@ -19,14 +19,21 @@ load_dotenv()
 
 def create_app(config=None):
     app = Flask(__name__, static_folder='static')
-    CORS(app)
+    CORS(app, supports_credentials=True, origins=["https://mamaskin-frontend-afbb848647f2.herokuapp.com"])
 
+    app.secret_key = "mamaskin_secret_key"
+
+    app.config['SESSION_COOKIE_SAMESITE'] = 'None'  
+    app.config['SESSION_COOKIE_SECURE'] = False 
+
+    # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     database_url = os.environ.get('DATABASE_URL')
     if database_url.startswith('postgres://'):
         database_url = database_url.replace('postgres://', 'postgresql://', 1)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+
 
     db.init_app(app)
     migrate.init_app(app,db)
@@ -43,9 +50,5 @@ def create_app(config=None):
     app.register_blueprint(google_auth_bp)
     app.register_blueprint(google_bp, url_prefix="/login")
     app.register_blueprint(auth_status_bp)
-    
-    @app.route("/", endpoint="home")
-    def redirect_frontend():
-        return "Backend is up! Frontend coming soon."
     
     return app
