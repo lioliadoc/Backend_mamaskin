@@ -24,10 +24,7 @@ def create_app(config=None):
     CORS(app, supports_credentials=True, origins=["https://mamaskin-frontend-afbb848647f2.herokuapp.com"])
 
     app.secret_key = "mamaskin_secret_key"
-
-    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
-    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
-
+    
     app.config['SESSION_COOKIE_SAMESITE'] = 'None'  
     app.config['SESSION_COOKIE_SECURE'] = True
     # app.config['SESSION_COOKIE_DOMAIN'] = ".herokuapp.com"
