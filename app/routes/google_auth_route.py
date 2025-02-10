@@ -7,6 +7,11 @@ bp = Blueprint("google_auth_bp", __name__, url_prefix="/login")
 @bp.route("/force-login")
 def force_login():
     session.clear()
+    @after_this_request
+    def after_redirect(response):
+        google_login_callback()
+        return response
+    
     return redirect(url_for("google.login"))
 
 @bp.route("/google/authorized", endpoint="google_login_callback")
@@ -14,7 +19,6 @@ def google_login_callback():
     resp = google.get("/oauth2/v2/userinfo")
     if not resp.ok:
         flash("Failed to fetch user info from Google.", "error")
-        # Instead of localhost, redirect to your Heroku front-end
         return redirect("https://mamaskin-frontend-afbb848647f2.herokuapp.com/stories")
 
     user_info = resp.json()
@@ -28,7 +32,6 @@ def google_login_callback():
     session["email"] = email
 
     flash("You have successfully logged in via Google!", "success")
-    # After successful login, redirect to your Heroku front-end
     return redirect("https://mamaskin-frontend-afbb848647f2.herokuapp.com/stories")
 
 @bp.route("/protected")
