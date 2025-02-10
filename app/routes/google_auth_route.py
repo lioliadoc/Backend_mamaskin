@@ -13,7 +13,7 @@ def force_login():
 def google_login_callback():
     resp = google.get("/oauth2/v2/userinfo")
     if not resp.ok:
-        flash("Failed to fetch user info from Google.", "error")
+        print("Failed to fetch user info from Google.", "error")
         return redirect("https://mamaskin-frontend-afbb848647f2.herokuapp.com/stories")
 
     user_info = resp.json()
@@ -32,7 +32,7 @@ def google_login_callback():
 @bp.route("/protected")
 def protected():
     if not google.authorized:
-        flash("Please log in with Google first. No valid token found.")
+        print("Please log in with Google first. No valid token found.")
         return redirect(url_for("google.login"))
 
     try:
