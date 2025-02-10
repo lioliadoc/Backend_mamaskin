@@ -7,7 +7,7 @@ bp = Blueprint("google_auth_bp", __name__, url_prefix="/login")
 
 @bp.route("/google/authorized", endpoint="google_login_callback")
 def google_login_callback():
-    print("Google authorized!", google.authorized)
+    print("Google authorized!", google.authorized, session)
     if not google.authorized:
         return redirect(url_for("google.login"))
 
