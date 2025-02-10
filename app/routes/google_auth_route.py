@@ -7,11 +7,6 @@ bp = Blueprint("google_auth_bp", __name__, url_prefix="/login")
 @bp.route("/force-login")
 def force_login():
     session.clear()
-    @after_this_request
-    def after_redirect(response):
-        google_login_callback()
-        return response
-    
     return redirect(url_for("google.login"))
 
 @bp.route("/google/authorized", endpoint="google_login_callback")
