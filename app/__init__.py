@@ -27,7 +27,7 @@ def create_app(config=None):
 
     app.config['SESSION_COOKIE_SAMESITE'] = 'None'  
     app.config['SESSION_COOKIE_SECURE'] = True
-    app.config['SESSION_COOKIE_DOMAIN'] = ".herokuapp.com"
+    # app.config['SESSION_COOKIE_DOMAIN'] = ".herokuapp.com"
     app.config["SESSION_TYPE"] = "filesystem" 
     app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=7) 
     app.config["SESSION_PERMANENT"] = True
