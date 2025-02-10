@@ -24,7 +24,7 @@ def create_app(config=None):
     app.secret_key = "mamaskin_secret_key"
 
     app.config['SESSION_COOKIE_SAMESITE'] = 'None'  
-    app.config['SESSION_COOKIE_SECURE'] = False 
+    app.config['SESSION_COOKIE_SECURE'] = True
 
     # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
