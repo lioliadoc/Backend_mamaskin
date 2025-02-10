@@ -13,7 +13,8 @@ def force_login():
 def google_login_callback():
     resp = google.get("/oauth2/v2/userinfo")
     if not resp.ok:
-        print("Failed to fetch user info from Google.", "error")
+        print("Failed to fetch user info from Google.", f"Error: {resp.status_code}, Response: {resp.text}" )
+
         return redirect("https://mamaskin-frontend-afbb848647f2.herokuapp.com/stories")
 
     user_info = resp.json()
