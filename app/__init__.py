@@ -1,4 +1,4 @@
-from flask import Flask, redirect
+from flask import Flask, redirect, session, timedelta
 from .models.condition import Condition
 from .models.symptom import Symptom
 from .models.story import Story
@@ -26,6 +26,7 @@ def create_app(config=None):
     app.config['SESSION_COOKIE_SAMESITE'] = 'None'  
     app.config['SESSION_COOKIE_SECURE'] = True
     app.config['SESSION_COOKIE_DOMAIN'] = ".herokuapp.com"
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
 
     # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
