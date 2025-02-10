@@ -1,4 +1,6 @@
-from flask import Flask, redirect, session, timedelta
+from flask import Flask, redirect, session
+from datetime import timedelta
+from flask import Flask, render_template
 from .models.condition import Condition
 from .models.symptom import Symptom
 from .models.story import Story
@@ -13,7 +15,7 @@ from flask_cors import CORS
 from .db import db, migrate
 from dotenv import load_dotenv
 import os
-from flask import Flask, render_template
+
 
 load_dotenv()
 
