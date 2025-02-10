@@ -26,7 +26,7 @@ def google_login_callback():
     session["name"] = name
     session["email"] = email
 
-    flash("You have successfully logged in via Google!", "success")
+    print("You have successfully logged in via Google!", "success")
     return redirect("https://mamaskin-frontend-afbb848647f2.herokuapp.com/stories")
 
 @bp.route("/protected")
@@ -44,7 +44,7 @@ def protected():
         user_info = resp.json()
         return f"This is a protected route. Hello, {user_info['name']}!"
     except TokenExpiredError:
-        flash("Your token has expired. Please log in again.")
+        print("Your token has expired. Please log in again.")
         return redirect(url_for("google.login"))
 
 
