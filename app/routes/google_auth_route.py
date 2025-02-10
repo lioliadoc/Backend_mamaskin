@@ -4,14 +4,22 @@ from oauthlib.oauth2.rfc6749.errors import TokenExpiredError
 
 bp = Blueprint("google_auth_bp", __name__, url_prefix="/login")
 
-@bp.route("/force-login")
-def force_login():
-    session.clear()
-    return redirect(url_for("google.login"))
 
 @bp.route("/google/authorized", endpoint="google_login_callback")
 def google_login_callback():
+    if not google.authorized:
+        return redirect(url_for("google.login"))
+
+    token = google.token
+    if not token:
+        print("OAuth token is missing!")
+        return "OAuth token is missing!", 400
+
     resp = google.get("/oauth2/v2/userinfo")
+    if resp.status_code == 401:
+        print("Token expired, refreshing...")
+        del google.token  # Remove the invalid token
+        return redirect(url_for("google.login"))  # Re-authenticate
     if not resp.ok:
         print("Failed to fetch user info from Google.", f"Error: {resp.status_code}, Response: {resp.text}" )
 
