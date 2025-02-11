@@ -11,8 +11,8 @@ def login():
 @bp.route("/google/authorized", endpoint="google_login_callback")
 def google_login_callback():
     google = current_app.extensions["authlib"].google
-    token = google.authorize_access_token()
-    print("Google token found!!", token, session)
+    user_info = google.authorize_access_token()
+    print("Google token found!!", user_info)
     
     # if not google.authorized:
     #     return redirect(url_for("google.login"))
@@ -33,8 +33,7 @@ def google_login_callback():
     #     return redirect("https://mamaskin-frontend-afbb848647f2.herokuapp.com/stories")
 
 
-    user_info = token.json()
-    google_id = user_info.get("id")
+    google_id = user_info.get("id_token")
     name = user_info.get("name", "")
     email = user_info.get("email", "")
 
