@@ -6,7 +6,7 @@ bp = Blueprint("google_auth_bp", __name__, url_prefix="/login")
 @bp.route("/login") 
 def login(): 
     google = current_app.extensions["authlib"].google
-    return google.authorize_redirect(url_for("google_login_callback", _external=True))
+    return google.authorize_redirect(url_for("google_auth_bp.google_login_callback", _external=True))
 
 @bp.route("/google/authorized", endpoint="google_login_callback")
 def google_login_callback():
