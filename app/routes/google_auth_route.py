@@ -10,10 +10,9 @@ def login():
 
 @bp.route("/google/authorized", endpoint="google_login_callback")
 def google_login_callback():
-    print("Google authorized!", google.authorized, session, google.token)
     google = current_app.extensions["authlib"].google
     token = google.authorize_access_token()
-    print("Google token found!!", token)
+    print("Google token found!!", token, session)
     
     # if not google.authorized:
     #     return redirect(url_for("google.login"))
