@@ -71,7 +71,7 @@ def create_app(config=None):
                             access_token_url="https://oauth2.googleapis.com/token", 
                             access_token_params=None, authorize_url="https://accounts.google.com/o/oauth2/auth", 
                             authorize_params=None, api_base_url="https://www.googleapis.com/oauth2/v2/", 
-                            userinfo_endpoint="https://www.googleapis.com/oauth2/v2/userinfo", 
+                            userinfo_endpoint="https://www.googleapis.com/oauth2/v3/userinfo", 
                             client_kwargs={"scope": "openid https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"})
     app.extensions["authlib"] = oauth
     return app
