@@ -9,8 +9,9 @@ from .routes.google_auth_route import bp as google_auth_bp
 from .routes.user_routes import bp as user_bp
 from .routes.condition_routes import bp as condition_bp
 from .routes.story_routes import bp as story_bp
-from flask_dance.contrib.google import make_google_blueprint
+# from flask_dance.contrib.google import make_google_blueprint
 from .routes.auth_status_route import bp as auth_status_bp
+from authlib.integrations.flask_client import OAuth
 from flask_cors import CORS
 from .db import db, migrate
 from dotenv import load_dotenv
@@ -46,21 +47,30 @@ def create_app(config=None):
 
 
     print ("GOOGLE_OAUTH_CLIENT_ID", os.environ["GOOGLE_OAUTH_CLIENT_ID"])
-    google_bp = make_google_blueprint(
-    client_id=os.environ["GOOGLE_OAUTH_CLIENT_ID"],
-    client_secret=os.environ["GOOGLE_OAUTH_CLIENT_SECRET"],
-    scope=[
-        "https://www.googleapis.com/auth/userinfo.email",
-        "https://www.googleapis.com/auth/userinfo.profile",
-        "openid"
-    ],  
-    redirect_to="google_auth_bp.google_login_callback")
+    # google_bp = make_google_blueprint(
+    # client_id=os.environ["GOOGLE_OAUTH_CLIENT_ID"],
+    # client_secret=os.environ["GOOGLE_OAUTH_CLIENT_SECRET"],
+    # scope=[
+    #     "https://www.googleapis.com/auth/userinfo.email",
+    #     "https://www.googleapis.com/auth/userinfo.profile",
+    #     "openid"
+    # ],  
+    # redirect_to="google_auth_bp.google_login_callback")
 
     app.register_blueprint(user_bp)
     app.register_blueprint(condition_bp)
     app.register_blueprint(story_bp)
     app.register_blueprint(google_auth_bp)
-    app.register_blueprint(google_bp, url_prefix="/login")
+    # app.register_blueprint(google_bp, url_prefix="/login")
     app.register_blueprint(auth_status_bp)
     
+    oauth = OAuth(app) 
+    google = oauth.register( name="google", 
+                            client_id="YOUR_CLIENT_ID", 
+                            client_secret="YOUR_CLIENT_SECRET", 
+                            access_token_url="https://oauth2.googleapis.com/token", 
+                            access_token_params=None, authorize_url="https://accounts.google.com/o/oauth2/auth", 
+                            authorize_params=None, api_base_url="https://www.googleapis.com/oauth2/v2/", 
+                            userinfo_endpoint="https://www.googleapis.com/oauth2/v2/userinfo", 
+                            client_kwargs={"scope": "openid https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"})
     return app
