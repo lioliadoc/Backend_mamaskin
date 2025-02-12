@@ -1,5 +1,5 @@
 from flask import Blueprint, abort, make_response, Response, request, url_for
-from sqlalchemy import or_
+from sqlalchemy import and_
 import requests
 from app.models.symptom import Symptom
 from app.models.condition import Condition
@@ -24,20 +24,22 @@ def get_condition_by_id(condition_id):
 @bp.get("/search")
 def get_condition_by_symptom():
     
-    symptom_query = request.args.get("symptom", "").strip()#remove trail spaces
+    symptom_query = request.args.get("symptom", "").strip()
     if not symptom_query:
         return {"error": "Please provide a symptom to search for."}, 400
+    
+    words = symptom_query.split()
 
-    matching_conditions = (
+    conditions = (
         db.session.query(Condition)
         .join(Condition.symptoms)
         .filter(
-            or_(
-                Symptom.name.ilike(f"%{symptom_query}%"),
+            and_(
+                *[Symptom.name.ilike(f"%{word}%") for word in words])
             )
         )
-        .all()
-    )
+    matching_conditions = conditions.all()
+    
     results = []
     for condition in matching_conditions:
         results.append({

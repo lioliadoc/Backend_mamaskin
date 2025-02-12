@@ -1,5 +1,4 @@
 from flask import Blueprint, redirect, url_for, session, current_app
-# from flask_dance.contrib.google import google
 
 bp = Blueprint("google_auth_bp", __name__, url_prefix="/login")
 
@@ -12,27 +11,7 @@ def login():
 def google_login_callback():
     google = current_app.extensions["authlib"].google
     user_info = google.authorize_access_token()
-    print("Google token found!!", user_info)
     
-    # if not google.authorized:
-    #     return redirect(url_for("google.login"))
-
-    # token = google.token
-    # if not token:
-    #     print("OAuth token is missing!")
-    #     return "OAuth token is missing!", 400
-
-    # resp = google.get("/oauth2/v2/userinfo")
-    # if resp.status_code == 401:
-    #     print("Token expired, refreshing...")
-    #     del google.token  # Remove the invalid token
-    #     return redirect(url_for("google.login"))  # Re-authenticate
-    # if not resp.ok:
-    #     print("Failed to fetch user info from Google.", f"Error: {resp.status_code}, Response: {resp.text}" )
-
-    #     return redirect("https://mamaskin-frontend-afbb848647f2.herokuapp.com/stories")
-
-
     google_id = user_info.get("id_token")
     name = user_info.get("name", "")
     email = user_info.get("email", "")
@@ -42,7 +21,6 @@ def google_login_callback():
     session["name"] = name
     session["email"] = email
 
-    print("You have successfully logged in via Google!", "success")
     return redirect("https://mamaskin-frontend-afbb848647f2.herokuapp.com/stories")
 
 
