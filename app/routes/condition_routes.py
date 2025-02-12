@@ -1,5 +1,5 @@
 from flask import Blueprint, abort, make_response, Response, request, url_for
-from sqlalchemy import and_
+from sqlalchemy import or_
 import requests
 from app.models.symptom import Symptom
 from app.models.condition import Condition
@@ -34,7 +34,7 @@ def get_condition_by_symptom():
         db.session.query(Condition)
         .join(Condition.symptoms)
         .filter(
-            and_(
+            or_(
                 *[Symptom.name.ilike(f"%{word}%") for word in words])
             )
         )
