@@ -9,7 +9,6 @@ from .routes.google_auth_route import bp as google_auth_bp
 from .routes.user_routes import bp as user_bp
 from .routes.condition_routes import bp as condition_bp
 from .routes.story_routes import bp as story_bp
-# from flask_dance.contrib.google import make_google_blueprint
 from .routes.auth_status_route import bp as auth_status_bp
 from authlib.integrations.flask_client import OAuth
 from flask_cors import CORS
@@ -28,12 +27,10 @@ def create_app(config=None):
     
     app.config['SESSION_COOKIE_SAMESITE'] = 'None'  
     app.config['SESSION_COOKIE_SECURE'] = True
-    # app.config['SESSION_COOKIE_DOMAIN'] = ".herokuapp.com"
     app.config["SESSION_TYPE"] = "filesystem" 
     app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=7) 
     app.config["SESSION_PERMANENT"] = True
 
-    # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     database_url = os.environ.get('DATABASE_URL')
     if database_url.startswith('postgres://'):
@@ -45,23 +42,10 @@ def create_app(config=None):
     db.init_app(app)
     migrate.init_app(app,db)
 
-
-    print ("GOOGLE_OAUTH_CLIENT_ID", os.environ["GOOGLE_OAUTH_CLIENT_ID"])
-    # google_bp = make_google_blueprint(
-    # client_id=os.environ["GOOGLE_OAUTH_CLIENT_ID"],
-    # client_secret=os.environ["GOOGLE_OAUTH_CLIENT_SECRET"],
-    # scope=[
-    #     "https://www.googleapis.com/auth/userinfo.email",
-    #     "https://www.googleapis.com/auth/userinfo.profile",
-    #     "openid"
-    # ],  
-    # redirect_to="google_auth_bp.google_login_callback")
-
     app.register_blueprint(user_bp)
     app.register_blueprint(condition_bp)
     app.register_blueprint(story_bp)
     app.register_blueprint(google_auth_bp)
-    # app.register_blueprint(google_bp, url_prefix="/login")
     app.register_blueprint(auth_status_bp)
     
     oauth = OAuth(app) 

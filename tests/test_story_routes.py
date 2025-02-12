@@ -3,9 +3,7 @@ from app.models.story import Story
 from app.db import db
 
 def test_create_story_success(create_story_response):
-    """
-    Tests the POST /stories endpoint to ensure a story is created successfully.
-    """
+
     response = create_story_response
     assert response.status_code == 201  
     data = response.get_json()

@@ -9,7 +9,6 @@ class Symptom(db.Model):
     condition_id:Mapped[int] = mapped_column(ForeignKey('condition.id'))
     condition: Mapped["Condition"] = relationship(back_populates="symptoms")
 
-    # return a string representation of a Symptom object
     def __repr__(self):
         return f"<Symptom {self.name}>"
     

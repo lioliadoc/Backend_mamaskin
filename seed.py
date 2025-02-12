@@ -13,7 +13,6 @@ def seed_data():
         if existing:
             existing.description = cond_info["description"]
             existing.references = cond_info["references"]
-            # Update the newly added field
             existing.requires_healthcare_provider = cond_info["requires_healthcare_provider"]
             condition_map[name] = existing
         else:
