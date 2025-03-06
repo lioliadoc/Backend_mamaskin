@@ -48,5 +48,86 @@ Symptom-based Search:
 #### Installation and Setup
 
 
+1. **Clone the Repository**  
+   ```
+   git clone https://github.com/lioliadoc/mamaskin.git
+   cd mamaskin
+   ```
+## Set Up Backend (Flask)
+
+1. **Create and activate a virtual environment** :
+
+    ```
+    python3 -m venv venv
+    source venv/bin/activate  
+    
+    ```
+
+2. **Install backend dependencies**:
+
+    ```
+    pip install -r requirements.txt
+    ```
+
+3. **Configure environment variables**:
+
+   - Create a `.env` file in the root.
+   - Add variables such as:
+
+    ```ini
+    
+    DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DB_NAME
+    SECRET_KEY=secret_key
+    GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
+    GOOGLE_CLIENT_SECRET=your_google_client_secret
+    ```
+
+4. **Run database migrations**:
+
+    ```
+    flask db upgrade
+    ```
+
+5. **Start the Flask server**:
+
+    ```
+    flask run
+    ```
+
+   The Flask server should now be running at `http://127.0.0.1:5000/` 
+---
+
+##### Set Up Frontend (React)
+
+1. **Navigate to the frontend folder**:
+   
+    ```
+    cd frontend
+    ```
+
+2. **Install frontend dependencies**:
+
+    ```
+    npm install
+    ```
+
+3. **Start the React development server**:
+
+    ```
+    npm start
+    ```
+
+   The React app should now be accessible at `http://localhost:3000/`.
+
+---
+
+## Testing
+
+- **For backend tests** :
+
+  ```
+  pytest
+
+
 
 
