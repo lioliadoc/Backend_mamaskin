@@ -53,7 +53,7 @@ Symptom-based Search:
    git clone https://github.com/lioliadoc/mamaskin.git
    cd mamaskin
    ```
-## Set Up Backend (Flask)
+##### Set Up Backend (Flask)
 
 1. **Create and activate a virtual environment** :
 
@@ -91,13 +91,13 @@ Symptom-based Search:
 5. **Start the Flask server**:
 
     ```
-    flask run
+    flask run --debug
     ```
 
    The Flask server should now be running at `http://127.0.0.1:5000/` 
 ---
 
-##### Set Up Frontend (React)
+###### Set Up Frontend (React)
 
 1. **Navigate to the frontend folder**:
    
@@ -114,19 +114,13 @@ Symptom-based Search:
 3. **Start the React development server**:
 
     ```
-    npm start
+    npm run dev
     ```
 
-   The React app should now be accessible at `http://localhost:3000/`.
+   The React app should now be accessible at `(http://localhost:5173)`.
 
 ---
 
-## Testing
-
-- **For backend tests** :
-
-  ```
-  pytest
 
 
 
